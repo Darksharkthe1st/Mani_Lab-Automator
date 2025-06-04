@@ -72,6 +72,8 @@ start:
 				}
 			}
 
+			magnetTo(zeroCurrent, zeroVoltage);
+
 			
 
 			string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";

@@ -28,10 +28,10 @@ string zeroCurrent = "4"; //Current at zero gauss
 int main()
 {
 start:
-	string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
+	/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
 	wstring stemp = wstring(s.begin(), s.end());
 	LPCWSTR sw = stemp.c_str();
-	mciSendString(sw, NULL, 0, NULL);
+	mciSendString(sw, NULL, 0, NULL);*/
 	string inputVoltage;
 	double inputGauss;
 	cout << "Give me the Value for Gauss: ";

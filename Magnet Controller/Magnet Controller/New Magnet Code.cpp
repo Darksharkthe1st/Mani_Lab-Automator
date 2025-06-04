@@ -76,10 +76,10 @@ start:
 
 			
 
-			string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
+			/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
 			wstring stemp = wstring(s.begin(), s.end());
 			LPCWSTR sw = stemp.c_str();
-			mciSendString(sw, NULL, 0, NULL);
+			mciSendString(sw, NULL, 0, NULL);*/
 
 			::ShowWindow(::GetConsoleWindow(), SW_SHOW); //Shows the black box
 			cout << "Give me the Value for Gauss: ";

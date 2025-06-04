@@ -1,0 +1,9 @@
+﻿  Window Experimentation in C++.cpp
+C:\Users\Mani Lab\source\repos\Experimentation with Windows\Experimentation with Windows\Window Experimentation in C++.cpp(40,1): warning C4102: 'start': unreferenced label
+C:\Users\Mani Lab\source\repos\Experimentation with Windows\Experimentation with Windows\Window Experimentation in C++.cpp(245,8): warning C4101: 'p': unreferenced local variable
+  Generating code
+  1 of 261 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Experimentation with Windows.vcxproj -> C:\Users\Mani Lab\source\repos\Experimentation with Windows\x64\Release\Experiment Project.exe

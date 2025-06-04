@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Magnet Code.cpp" />
+    <ClCompile Include="New Magnet Code.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="done sound effect.mp3" />

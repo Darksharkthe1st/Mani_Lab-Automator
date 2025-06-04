@@ -1,3 +1,4 @@
 ﻿  Magnet Code.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1134,5): error MSB6006: "link.exe" exited with code 1168.
-LINK : fatal error LNK1168: cannot open C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\x64\Debug\Magnet Controller.exe for writing
+  New Magnet Code.cpp
+  Generating Code...
+  Magnet Controller.vcxproj -> C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\x64\Debug\Magnet Controller.exe

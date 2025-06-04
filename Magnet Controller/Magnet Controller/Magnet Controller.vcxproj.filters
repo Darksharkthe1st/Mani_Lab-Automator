@@ -18,6 +18,9 @@
     <ClCompile Include="Magnet Code.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="New Magnet Code.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Media Include="done sound effect.mp3">

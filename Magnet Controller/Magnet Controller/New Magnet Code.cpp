@@ -1,0 +1,214 @@
+#include <iostream>
+#include <Windows.h>
+#include <stdlib.h>
+#include <string>
+#pragma comment(lib, "Winmm.lib")
+
+using namespace std;
+
+void clickKey(char c);
+void keyDown(short s);
+void keyUp(short s);
+void keyTap(short s);
+void sendString(string s);
+void countSleep(DWORD milliseconds);
+string doubleToStr(int decimalPlaces, double d);
+void terminateIfEsc();
+void magnetTo(string current, string voltage);
+int delay = 0;
+
+/*VARIABLES FOR CHANGING*/
+//Minimum 6 seconds, otherwise the program will break.
+int interval = 10000; //Number of milliseconds (in thousandths of seconds) per interval
+//MULTIPLY THE AMOUNT OF SECONDS BY 1000
+string zeroVoltage = "0.071"; //Voltage at zero gauss
+
+string zeroCurrent = "4"; //Current at zero gauss
+
+
+int main()
+{
+start:
+	/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
+	wstring stemp = wstring(s.begin(), s.end());
+	LPCWSTR sw = stemp.c_str();
+	mciSendString(sw, NULL, 0, NULL);*/
+	string inputVoltage;
+	double inputGauss;
+	string binaryString;
+	cout << "Give me the Value for Gauss: ";
+	cin >> inputGauss;
+	cout << "Give me your interval in milliseconds (must be greater than 7500): ";
+	cin >> interval;
+	cout << "Give me the binary string (1's and 0's only): ";
+	cin >> binaryString;
+
+	inputVoltage = doubleToStr(0, (inputGauss + 9.0991) / 260.65);
+	string inputCurrent = "4";
+	cout << "Voltage: " << inputVoltage;
+	cout << "; Current: " << inputCurrent;
+
+	//Uncomment if current needs to be changed
+	/*string magVal2;
+	cout << "Give me the Value for Current: ";
+	cin >> magVal2;*/
+	string magVal1 = inputVoltage;
+	string magVal2 = inputCurrent;
+	Sleep(1000);
+	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+	//std::cout << "Hello World!\n";
+	while (true) {
+		Sleep(50);
+		//delay += countSleep(50);
+		if (GetAsyncKeyState(VK_F12)) {
+			::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides the black box
+
+			for (int i = 0; i < binaryString.length(); i++) {
+				if (binaryString[i] == '0') {
+					magnetTo(zeroCurrent, zeroVoltage);
+				}
+				else {
+					magnetTo(inputCurrent, inputVoltage);
+				}
+			}
+
+			
+
+			string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
+			wstring stemp = wstring(s.begin(), s.end());
+			LPCWSTR sw = stemp.c_str();
+			mciSendString(sw, NULL, 0, NULL);
+
+			::ShowWindow(::GetConsoleWindow(), SW_SHOW); //Shows the black box
+			cout << "Give me the Value for Gauss: ";
+			cin >> inputGauss;
+			inputVoltage = doubleToStr(4, (inputGauss + 9.0991) / 260.65);
+			inputCurrent = "4";
+		}
+		if (GetAsyncKeyState(VK_ESCAPE)) {
+			keyTap(VK_TAB);
+			cout << "HI\n";
+		}
+		if (GetAsyncKeyState(VK_NUMPAD0)) {
+			terminate();
+		}
+		if (GetAsyncKeyState(VK_NUMPAD2)) {
+			goto start;
+		}
+	}
+}
+
+void magnetTo(string current, string voltage) {
+	delay = 0;
+	/*Now we turn the magnet off*/
+	{//Deletes the previous text
+		keyDown(VK_CONTROL);
+		clickKey('a');
+		keyUp(VK_CONTROL); //Ctrl + a
+		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
+
+		countSleep(1000);
+		//Types in the voltage
+		sendString(voltage);
+
+		countSleep(1000);
+		//Goes to the current box
+		clickKey('\t');
+
+		//Deletes the previous text
+		keyDown(VK_CONTROL);
+		clickKey('a');
+		keyUp(VK_CONTROL); //Ctrl + a
+		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
+
+		countSleep(1000);
+		//Types in the current
+		sendString(current);
+
+		//Goes to and hits the magnet switch button
+		clickKey('\t');
+		keyTap(VK_RETURN);
+
+		countSleep(1000);
+		/*Clear the error message screen*/
+		clickKey('\t');
+		keyTap(VK_RETURN);
+
+		countSleep(1000);
+		/*Go back to the original location*/
+		for (int tab = 0; tab < 14; tab++) {
+			keyTap(VK_TAB);
+		}
+		countSleep(1000);
+		clickKey('x'); clickKey('\b');
+	}
+	Sleep(interval - delay);
+}
+
+void clickKey(char c) {
+
+	INPUT Input = { 0 };
+	Input.type = INPUT_KEYBOARD;
+	Input.ki.dwFlags = 0;
+	Input.ki.wVk = VkKeyScanA(c); //Character to output
+	SendInput(1, &Input, sizeof(Input));
+	ZeroMemory(&Input, sizeof(Input));
+
+	Input.type = INPUT_KEYBOARD;
+	Input.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &Input, sizeof(Input));
+	ZeroMemory(&Input, sizeof(Input));
+}
+
+void keyDown(short s) {
+	INPUT Input = { 0 };
+	Input.type = INPUT_KEYBOARD;
+	Input.ki.wVk = s; //Does the command connected to the short
+	Input.ki.dwFlags = 0; //Key Pressed down
+	SendInput(1, &Input, sizeof(Input));
+	ZeroMemory(&Input, sizeof(Input));
+}
+
+void keyUp(short s) {
+	INPUT Input = { 0 };
+	Input.type = INPUT_KEYBOARD;
+	Input.ki.wVk = s; //Does the command connected to the short
+	Input.ki.dwFlags = KEYEVENTF_KEYUP; //Key Pressed down
+	SendInput(1, &Input, sizeof(Input));
+	ZeroMemory(&Input, sizeof(Input));
+}
+
+void keyTap(short s) {
+	keyUp(s); keyDown(s);
+}
+
+//returns total delay caused
+void sendString(string s) {
+	for (int i = 0; i < s.length(); i++) {
+		Sleep(10);
+		clickKey(s[i]);
+	}
+	//return s.length() * 10;
+}
+
+void countSleep(DWORD dwMilliseconds) {
+	terminateIfEsc();
+	Sleep(dwMilliseconds);
+	delay += dwMilliseconds;
+}
+
+
+string doubleToStr(int decimalPlaces, double d) {
+	d = round(d * 10000) / 10000;
+	string str = to_string(d);
+	while (str[str.length() - 1] == '0') {
+		str = str.substr(0, str.length() - 1);
+	}
+	return str;
+}
+
+void terminateIfEsc() {
+	if (GetAsyncKeyState(VK_ESCAPE)) {
+		terminate();
+	}
+}

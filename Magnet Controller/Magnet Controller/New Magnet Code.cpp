@@ -34,16 +34,22 @@ start:
 	LPCWSTR sw = stemp.c_str();
 	mciSendString(sw, NULL, 0, NULL);*/
 	string inputVoltage;
+	string endingVoltage;
 	double inputGauss;
 	string binaryString;
+	double endingGauss;
 	cout << "Give me the Value for Gauss: ";
 	cin >> inputGauss;
 	cout << "Give me your interval in milliseconds (must be greater than 7500): ";
 	cin >> interval;
 	cout << "Give me the binary string (1's and 0's only): ";
 	cin >> binaryString;
+	cout << "Give me the final value for Gauss: ";
+	cin >> endingGauss;
 
 	inputVoltage = doubleToStr(0, (inputGauss + 9.0991) / 260.65);
+	endingVoltage = doubleToStr(0, (endingGauss + 9.0991) / 260.65);
+
 	string inputCurrent = "4";
 	cout << "Voltage: " << inputVoltage;
 	cout << "; Current: " << inputCurrent;
@@ -67,14 +73,15 @@ start:
 				if (binaryString[i] == '0') {
 					magnetTo(zeroCurrent, zeroVoltage);
 				}
-				else {
+				else if (binaryString[i] == '1') {
 					magnetTo(inputCurrent, inputVoltage);
+				}
+				else if (binaryString[i] == '2') {
+					magnetTo(inputCurrent, endingVoltage);
 				}
 			}
 
-			magnetTo(zeroCurrent, zeroVoltage);
-
-			
+			magnetTo(inputCurrent, endingVoltage);
 
 			/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
 			wstring stemp = wstring(s.begin(), s.end());

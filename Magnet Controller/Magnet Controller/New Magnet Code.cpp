@@ -21,18 +21,16 @@ int delay = 0;
 //Minimum 6 seconds, otherwise the program will break.
 int interval = 10000; //Number of milliseconds (in thousandths of seconds) per interval
 //MULTIPLY THE AMOUNT OF SECONDS BY 1000
-string zeroVoltage = "0.071"; //Voltage at zero gauss
+string zeroVoltage = "-0.085"; //Voltage at zero gauss
+string zeroCurrent = "4.2"; //Current at zero gauss
 
-string zeroCurrent = "4"; //Current at zero gauss
-
+double gaussFunction(int voltage) {
+	return 252.34 * voltage + 21.1;
+}
 
 int main()
 {
 start:
-	/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
-	wstring stemp = wstring(s.begin(), s.end());
-	LPCWSTR sw = stemp.c_str();
-	mciSendString(sw, NULL, 0, NULL);*/
 	string inputVoltage;
 	string endingVoltage;
 	double inputGauss;
@@ -50,7 +48,7 @@ start:
 	inputVoltage = doubleToStr(0, (inputGauss + 9.0991) / 260.65);
 	endingVoltage = doubleToStr(0, (endingGauss + 9.0991) / 260.65);
 
-	string inputCurrent = "4";
+	string inputCurrent = "4.2";
 	cout << "Voltage: " << inputVoltage;
 	cout << "; Current: " << inputCurrent;
 
@@ -92,7 +90,7 @@ start:
 			cout << "Give me the Value for Gauss: ";
 			cin >> inputGauss;
 			inputVoltage = doubleToStr(4, (inputGauss + 9.0991) / 260.65);
-			inputCurrent = "4";
+			inputCurrent = "4.2";
 		}
 		if (GetAsyncKeyState(VK_ESCAPE)) {
 			keyTap(VK_TAB);

@@ -23,7 +23,7 @@ double calibrateTo(double Gauss);
 void showMousePos();
 double calibToZero();
 int delay = 0;
-const string current = "8";
+const string current = "4.2";
 POINT textPosition;
 
 /*VARIABLES FOR CHANGING*/
@@ -32,7 +32,7 @@ int interval = 10000; //Number of milliseconds (in thousandths of seconds) per i
 //MULTIPLY THE AMOUNT OF SECONDS BY 1000
 string zeroVoltage = "0.071"; //Voltage at zero gauss
 
-string zeroCurrent = "4"; //Current at zero gauss
+string zeroCurrent = "4.2"; //Current at zero gauss
 
 int main() {
 	textPosition.x = 700; textPosition.y = 270;

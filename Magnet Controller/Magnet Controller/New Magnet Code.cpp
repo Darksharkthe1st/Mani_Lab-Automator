@@ -23,9 +23,11 @@ int interval = 10000; //Number of milliseconds (in thousandths of seconds) per i
 //MULTIPLY THE AMOUNT OF SECONDS BY 1000
 string zeroVoltage = "-0.085"; //Voltage at zero gauss
 string zeroCurrent = "4.2"; //Current at zero gauss
+string defaultCurrent = "4.2"; //Current used by default
 
-double gaussFunction(int voltage) {
-	return 252.34 * voltage + 21.1;
+//Calculate voltage from Gauss
+double voltageFunction(int gauss) {
+	return (gauss - 21.1) / 252.34;
 }
 
 int main()
@@ -45,10 +47,10 @@ start:
 	cout << "Give me the final value for Gauss: ";
 	cin >> endingGauss;
 
-	inputVoltage = doubleToStr(0, (inputGauss + 9.0991) / 260.65);
-	endingVoltage = doubleToStr(0, (endingGauss + 9.0991) / 260.65);
+	inputVoltage = doubleToStr(0, voltageFunction(inputGauss));
+	endingVoltage = doubleToStr(0, voltageFunction(endingGauss));
 
-	string inputCurrent = "4.2";
+	string inputCurrent = defaultCurrent;
 	cout << "Voltage: " << inputVoltage;
 	cout << "; Current: " << inputCurrent;
 
@@ -89,8 +91,8 @@ start:
 			::ShowWindow(::GetConsoleWindow(), SW_SHOW); //Shows the black box
 			cout << "Give me the Value for Gauss: ";
 			cin >> inputGauss;
-			inputVoltage = doubleToStr(4, (inputGauss + 9.0991) / 260.65);
-			inputCurrent = "4.2";
+			inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
+			inputCurrent = defaultCurrent;
 		}
 		if (GetAsyncKeyState(VK_ESCAPE)) {
 			keyTap(VK_TAB);

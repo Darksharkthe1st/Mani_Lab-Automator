@@ -185,7 +185,7 @@ void magnetTo(string current, string voltage) {
 void dismissDialog() {
 	POINT dialogButton;
 	dialogButton.x = 690;
-	dialogButton.y = 3922;
+	dialogButton.y = 392;
 	terminateIfEsc();
 	clickAt(dialogButton);
 	Sleep(50);

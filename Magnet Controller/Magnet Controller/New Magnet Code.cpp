@@ -81,39 +81,42 @@ start:
 
 	Sleep(1000);
 
-	Sleep(50);
-	if (GetAsyncKeyState(VK_F12) & 0x8000) {
-		::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+	while (true) {
+		Sleep(50);
+		if (GetAsyncKeyState(VK_F12) & 0x8000) {
+			::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
-		for (int i = 0; i < binaryString.length(); i++) {
-			if (binaryString[i] == '0') {
-				magnetTo(zeroCurrent, zeroVoltage);
+			for (int i = 0; i < binaryString.length(); i++) {
+				if (binaryString[i] == '0') {
+					magnetTo(zeroCurrent, zeroVoltage);
+				}
+				else if (binaryString[i] == '1') {
+					magnetTo(inputCurrent, inputVoltage);
+				}
+				else if (binaryString[i] == '2') {
+					magnetTo(inputCurrent, endingVoltage);
+				}
 			}
-			else if (binaryString[i] == '1') {
-				magnetTo(inputCurrent, inputVoltage);
-			}
-			else if (binaryString[i] == '2') {
-				magnetTo(inputCurrent, endingVoltage);
-			}
+
+			magnetTo(inputCurrent, endingVoltage);
+
+			::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+			cout << "Give me the Value for Gauss: ";
+			cin >> inputGauss;
+			inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
+			inputCurrent = defaultCurrent;
+			break;
 		}
-
-		magnetTo(inputCurrent, endingVoltage);
-
-		::ShowWindow(::GetConsoleWindow(), SW_SHOW);
-		cout << "Give me the Value for Gauss: ";
-		cin >> inputGauss;
-		inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
-		inputCurrent = defaultCurrent;
-	}
-	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
-		keyTap(VK_TAB);
-		cout << "HI\n";
-	}
-	if (GetAsyncKeyState(VK_NUMPAD0) & 0x8000) {
-		terminate();
-	}
-	if (GetAsyncKeyState(VK_NUMPAD2) & 0x8000) {
-		goto start;
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+			keyTap(VK_TAB);
+			cout << "HI\n";
+		}
+		if (GetAsyncKeyState(VK_NUMPAD0) & 0x8000) {
+			terminate();
+		}
+		if (GetAsyncKeyState(VK_NUMPAD2) & 0x8000) {
+			goto start;
+		}
 	}
 }
 

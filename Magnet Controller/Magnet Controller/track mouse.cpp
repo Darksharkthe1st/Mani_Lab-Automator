@@ -1,5 +1,8 @@
 #include <iostream>
 #include <Windows.h>
+#pragma comment(lib, "Winmm.lib")
+
+using namespace std;
 
 int main() {
     while (true) {

@@ -64,48 +64,43 @@ start:
 	Sleep(1000);
 	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 	//std::cout << "Hello World!\n";
-	while (true) {
-		Sleep(50);
-		//delay += countSleep(50);
-		if (GetAsyncKeyState(VK_F12)) {
-			::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides the black box
+	
+	Sleep(50);
+	//delay += countSleep(50);
+	if (GetAsyncKeyState(VK_F12)) {
+		::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides the black box
 
-			for (int i = 0; i < binaryString.length(); i++) {
-				if (binaryString[i] == '0') {
-					magnetTo(zeroCurrent, zeroVoltage);
-				}
-				else if (binaryString[i] == '1') {
-					magnetTo(inputCurrent, inputVoltage);
-				}
-				else if (binaryString[i] == '2') {
-					magnetTo(inputCurrent, endingVoltage);
-				}
+		for (int i = 0; i < binaryString.length(); i++) {
+			if (binaryString[i] == '0') {
+				magnetTo(zeroCurrent, zeroVoltage);
 			}
+			else if (binaryString[i] == '1') {
+				magnetTo(inputCurrent, inputVoltage);
+			}
+			else if (binaryString[i] == '2') {
+				magnetTo(inputCurrent, endingVoltage);
+			}
+		}
 
-			magnetTo(inputCurrent, endingVoltage);
+		magnetTo(inputCurrent, endingVoltage);
 
-			/*string s = "open \"done sound effect.mp3\" type mpegvideo alias mp3";
-			wstring stemp = wstring(s.begin(), s.end());
-			LPCWSTR sw = stemp.c_str();
-			mciSendString(sw, NULL, 0, NULL);*/
-
-			::ShowWindow(::GetConsoleWindow(), SW_SHOW); //Shows the black box
-			cout << "Give me the Value for Gauss: ";
-			cin >> inputGauss;
-			inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
-			inputCurrent = defaultCurrent;
-		}
-		if (GetAsyncKeyState(VK_ESCAPE)) {
-			keyTap(VK_TAB);
-			cout << "HI\n";
-		}
-		if (GetAsyncKeyState(VK_NUMPAD0)) {
-			terminate();
-		}
-		if (GetAsyncKeyState(VK_NUMPAD2)) {
-			goto start;
-		}
+		::ShowWindow(::GetConsoleWindow(), SW_SHOW); //Shows the black box
+		cout << "Give me the Value for Gauss: ";
+		cin >> inputGauss;
+		inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
+		inputCurrent = defaultCurrent;
 	}
+	if (GetAsyncKeyState(VK_ESCAPE)) {
+		keyTap(VK_TAB);
+		cout << "HI\n";
+	}
+	if (GetAsyncKeyState(VK_NUMPAD0)) {
+		terminate();
+	}
+	if (GetAsyncKeyState(VK_NUMPAD2)) {
+		goto start;
+	}
+	
 }
 
 void magnetTo(string current, string voltage) {

@@ -12,6 +12,7 @@ void keyUp(short s);
 void keyTap(short s);
 void sendString(string s);
 void countSleep(DWORD milliseconds);
+void sleepCut(int percent);
 string doubleToStr(int decimalPlaces, double d);
 void terminateIfEsc();
 void magnetTo(string current, string voltage);
@@ -116,11 +117,11 @@ void magnetTo(string current, string voltage) {
 		keyUp(VK_CONTROL); //Ctrl + a
 		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
 
-		countSleep(1000);
+		countSleep(16);
 		//Types in the voltage
 		sendString(voltage);
 
-		countSleep(1000);
+		countSleep(16);
 		//Goes to the current box
 		clickKey('\t');
 
@@ -130,7 +131,7 @@ void magnetTo(string current, string voltage) {
 		keyUp(VK_CONTROL); //Ctrl + a
 		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
 
-		countSleep(1000);
+		countSleep(16);
 		//Types in the current
 		sendString(current);
 
@@ -138,18 +139,21 @@ void magnetTo(string current, string voltage) {
 		clickKey('\t');
 		keyTap(VK_RETURN);
 
-		countSleep(1000);
+		countSleep(16);
 		/*Clear the error message screen*/
 		clickKey('\t');
 		keyTap(VK_RETURN);
 
-		countSleep(1000);
+		countSleep(16);
 		/*Go back to the original location*/
 		for (int tab = 0; tab < 14; tab++) {
 			keyTap(VK_TAB);
 		}
-		countSleep(1000);
+		countSleep(16);
 		clickKey('x'); clickKey('\b');
+	}
+	if (delay > interval) {
+		delay = interval;
 	}
 	Sleep(interval - delay);
 }
@@ -204,6 +208,12 @@ void countSleep(DWORD dwMilliseconds) {
 	terminateIfEsc();
 	Sleep(dwMilliseconds);
 	delay += dwMilliseconds;
+}
+
+void sleepCut(int percent) {
+	terminateIfEsc();
+	Sleep(interval * (percent) / 100);
+	delay += interval * (percent) / 100;
 }
 
 

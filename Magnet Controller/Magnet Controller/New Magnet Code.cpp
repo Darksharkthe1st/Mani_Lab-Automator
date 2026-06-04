@@ -141,31 +141,31 @@ void magnetTo(string current, string voltage) {
 	// --- Click into VSET and type voltage ---
 	terminateIfEsc();
 	clickAt(vsetPos);
-	countSleep(50);
+	sleepCut(12);
 	keyDown(VK_CONTROL);
 	clickKey('a');
 	keyUp(VK_CONTROL);
 	keyDown(VK_DELETE);
-	countSleep(16);
+	sleepCut(12);
 	sendString(voltage);
-	countSleep(16);
+	sleepCut(12);
 
 	// --- Click into ISET and type current ---
 	terminateIfEsc();
 	clickAt(isetPos);
-	countSleep(50);
+	sleepCut(12);
 	keyDown(VK_CONTROL);
 	clickKey('a');
 	keyUp(VK_CONTROL);
 	keyDown(VK_DELETE);
-	countSleep(16);
+	sleepCut(12);
 	sendString(current);
-	countSleep(16);
+	sleepCut(12);
 
 	// --- Click SET button ---
 	terminateIfEsc();
 	clickAt(setPos);
-	countSleep(16);
+	sleepCut(12);
 
 	// --- Dismiss any dialog that appeared after SET ---
 	terminateIfEsc();
@@ -174,7 +174,7 @@ void magnetTo(string current, string voltage) {
 	// --- Return focus to VSET so next iteration starts consistently ---
 	terminateIfEsc();
 	clickAt(vsetPos);
-	countSleep(16);
+	sleepCut(12);
 
 	if (delay > interval) {
 		delay = interval;

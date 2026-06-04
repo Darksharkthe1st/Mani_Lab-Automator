@@ -17,6 +17,7 @@ string doubleToStr(int decimalPlaces, double d);
 void terminateIfEsc();
 void magnetTo(string current, string voltage);
 void clickAt(POINT p);
+void dismissDialog();
 
 int delay = 0;
 
@@ -105,6 +106,7 @@ start:
 			cin >> inputGauss;
 			inputVoltage = doubleToStr(4, voltageFunction(inputGauss));
 			inputCurrent = defaultCurrent;
+
 			break;
 		}
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
@@ -130,6 +132,9 @@ void magnetTo(string current, string voltage) {
 	isetPos.x = setButtonPos.x + ISET_OFFSET_X;
 	isetPos.y = setButtonPos.y + FIELD_OFFSET_Y;
 	setPos = setButtonPos;
+
+	// --- Dismiss any Kepco dialog before starting ---
+	dismissDialog();
 
 	// --- Click into VSET and type voltage ---
 	clickAt(vsetPos);
@@ -157,6 +162,9 @@ void magnetTo(string current, string voltage) {
 	clickAt(setPos);
 	countSleep(16);
 
+	// --- Dismiss any dialog that appeared after SET ---
+	dismissDialog();
+
 	// --- Return focus to VSET so next iteration starts consistently ---
 	clickAt(vsetPos);
 	countSleep(16);
@@ -165,6 +173,14 @@ void magnetTo(string current, string voltage) {
 		delay = interval;
 	}
 	Sleep(interval - delay);
+}
+
+void dismissDialog() {
+	POINT dialogButton;
+	dialogButton.x = 690;
+	dialogButton.y = 3922;
+	clickAt(dialogButton);
+	Sleep(50);
 }
 
 void clickAt(POINT p) {

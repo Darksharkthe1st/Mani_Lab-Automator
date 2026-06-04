@@ -124,6 +124,7 @@ start:
 
 void magnetTo(string current, string voltage) {
 	delay = 0;
+	terminateIfEsc();
 
 	// Build field positions from the recorded SET button position
 	POINT vsetPos, isetPos, setPos;
@@ -134,9 +135,11 @@ void magnetTo(string current, string voltage) {
 	setPos = setButtonPos;
 
 	// --- Dismiss any Kepco dialog before starting ---
+	terminateIfEsc();
 	dismissDialog();
 
 	// --- Click into VSET and type voltage ---
+	terminateIfEsc();
 	clickAt(vsetPos);
 	countSleep(50);
 	keyDown(VK_CONTROL);
@@ -148,6 +151,7 @@ void magnetTo(string current, string voltage) {
 	countSleep(16);
 
 	// --- Click into ISET and type current ---
+	terminateIfEsc();
 	clickAt(isetPos);
 	countSleep(50);
 	keyDown(VK_CONTROL);
@@ -159,13 +163,16 @@ void magnetTo(string current, string voltage) {
 	countSleep(16);
 
 	// --- Click SET button ---
+	terminateIfEsc();
 	clickAt(setPos);
 	countSleep(16);
 
 	// --- Dismiss any dialog that appeared after SET ---
+	terminateIfEsc();
 	dismissDialog();
 
 	// --- Return focus to VSET so next iteration starts consistently ---
+	terminateIfEsc();
 	clickAt(vsetPos);
 	countSleep(16);
 
@@ -179,6 +186,7 @@ void dismissDialog() {
 	POINT dialogButton;
 	dialogButton.x = 690;
 	dialogButton.y = 3922;
+	terminateIfEsc();
 	clickAt(dialogButton);
 	Sleep(50);
 }

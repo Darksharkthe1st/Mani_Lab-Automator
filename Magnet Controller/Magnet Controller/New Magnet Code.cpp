@@ -117,11 +117,11 @@ void magnetTo(string current, string voltage) {
 		keyUp(VK_CONTROL); //Ctrl + a
 		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
 
-		countSleep(16);
+		sleepCut(16);
 		//Types in the voltage
 		sendString(voltage);
 
-		countSleep(16);
+		sleepCut(16);
 		//Goes to the current box
 		clickKey('\t');
 
@@ -131,7 +131,7 @@ void magnetTo(string current, string voltage) {
 		keyUp(VK_CONTROL); //Ctrl + a
 		keyDown(VK_DELETE); //keyUp(VK_DELETE); //Delete
 
-		countSleep(16);
+		sleepCut(16);
 		//Types in the current
 		sendString(current);
 
@@ -139,17 +139,17 @@ void magnetTo(string current, string voltage) {
 		clickKey('\t');
 		keyTap(VK_RETURN);
 
-		countSleep(16);
+		sleepCut(16);
 		/*Clear the error message screen*/
 		clickKey('\t');
 		keyTap(VK_RETURN);
 
-		countSleep(16);
+		sleepCut(16);
 		/*Go back to the original location*/
 		for (int tab = 0; tab < 14; tab++) {
 			keyTap(VK_TAB);
 		}
-		countSleep(16);
+		sleepCut(16);
 		clickKey('x'); clickKey('\b');
 	}
 	if (delay > interval) {

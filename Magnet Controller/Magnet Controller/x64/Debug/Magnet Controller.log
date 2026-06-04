@@ -1,4 +1,4 @@
-﻿  Magnet Code.cpp
-  New Magnet Code.cpp
-  Generating Code...
-  Magnet Controller.vcxproj -> C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\x64\Debug\Magnet Controller.exe
+﻿  New Magnet Code.cpp
+C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\Magnet Controller\New Magnet Code.cpp(50,48): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\Magnet Controller\New Magnet Code.cpp(51,49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Mani Lab\Documents\GitHub\Mani_Lab-Automator\Magnet Controller\Magnet Controller\New Magnet Code.cpp(94,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data

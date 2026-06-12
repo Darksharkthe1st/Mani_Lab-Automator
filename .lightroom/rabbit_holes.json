@@ -1,0 +1,59 @@
+[
+  {
+    "signal_id": "magnet_controller_automation",
+    "display_name": "Magnet Controller — Kepco GUI automation",
+    "rationale": "Primary deliverable with 18+ commits from initial prototype through ternary state sequencing, F12 coordinate calibration, dialog dismissal, and timing hardening. Strongest ownership signal and most recruiter-relevant systems story (automating legacy GUI for scientific hardware).",
+    "search_paths": [
+      "Magnet Controller/Magnet Controller/New Magnet Code.cpp",
+      "Magnet Controller/Magnet Controller/Magnet Code.cpp",
+      "Magnet Controller/Magnet Controller/track mouse.cpp",
+      "Magnet Controller/Magnet Controller/Magnet Controller.vcxproj"
+    ],
+    "priority": 1,
+    "confidence": 0.95
+  },
+  {
+    "signal_id": "calibration_algorithms",
+    "display_name": "Magnet calibration — binary search & iterative refinement",
+    "rationale": "Non-trivial algorithmic work: binary search over voltage to hit target Gauss, nested decimal-place sweeps, and zero-calibration loops with feedback from external sensor data. Demonstrates numerical methods applied to real hardware constraints.",
+    "search_paths": [
+      "Magnet Calibrator/Magnet Calibrator/Calibrating Magnets in C++.cpp"
+    ],
+    "priority": 2,
+    "confidence": 0.85
+  },
+  {
+    "signal_id": "windows_input_simulation",
+    "display_name": "Windows API input & window control",
+    "rationale": "Reusable low-level pattern across projects: SendInput keyboard synthesis, mouse_event clicking, GetAsyncKeyState hotkeys, FindWindow/MoveWindow for LabVIEW and Kepco window management. Maps directly to systems/desktop engineering interviews.",
+    "search_paths": [
+      "Magnet Controller/Magnet Controller/New Magnet Code.cpp",
+      "Magnet Calibrator/Magnet Calibrator/Calibrating Magnets in C++.cpp",
+      "Experimentation with Windows/Experimentation with Windows/Window Experimentation in C++.cpp"
+    ],
+    "priority": 3,
+    "confidence": 0.88
+  },
+  {
+    "signal_id": "labview_file_ipc",
+    "display_name": "LabVIEW / gaussmeter file-based integration",
+    "rationale": "Shows cross-tool orchestration: launches LabVIEW 2017, positions Kepco window, and polls a shared text file written by a gaussmeter reader script. Good story for instrumentation pipelines even though LabVIEW source is external.",
+    "search_paths": [
+      "Magnet Calibrator/Magnet Calibrator/Calibrating Magnets in C++.cpp",
+      "Experimentation with Windows/Experimentation with Windows/Window Experimentation in C++.cpp"
+    ],
+    "priority": 4,
+    "confidence": 0.75
+  },
+  {
+    "signal_id": "experiment_prototype",
+    "display_name": "End-to-end experiment automation prototype",
+    "rationale": "Earlier integrated workflow combining zero-calibration, per-target calibration, and timed on/off magnet cycles in one program. Useful for showing full experiment lifecycle automation before the controller/calibrator split.",
+    "search_paths": [
+      "Experimentation with Windows/Experimentation with Windows/Window Experimentation in C++.cpp",
+      "Experimentation with Windows/Experimentation with Windows.sln"
+    ],
+    "priority": 5,
+    "confidence": 0.70
+  }
+]
